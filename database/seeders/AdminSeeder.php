@@ -19,7 +19,7 @@ class AdminSeeder extends Seeder
          DB::table('admins')->insert([
             'full_name' => 'Super Admin',
             'email' => 'admin@example.com',
-            'password' => Hash::make('password'), // Always hash password
+            'password' => Hash::make('123456789'), // Always hash password
             'created_at' => now(),
             'updated_at' => now(),
         ]);

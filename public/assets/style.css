@@ -1,0 +1,378 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css2?family=Material+Icons+Outlined');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-feature-settings: "lnum", "locl";
+  transition: font-family 0.3s ease;
+  color: #222222;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
+main p {
+  font-family: 'Poppins', sans-serif;
+  color: #666666;
+}
+
+/* Apply Poppins for Nepali language */
+[lang="ne"],
+[lang="ne"] body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1em;
+}
+
+/* Apply Noto Sans Devanagari only for numerals in Nepali */
+@font-face {
+  font-family: 'Noto Sans Devanagari';
+  src: url('https://fonts.gstatic.com/s/notosansdevanagari/v18/HTxL3nJvSgS4EtoYDRjM9OeI2EpNPg8UwRc-fcEeU.woff2') format('woff2');
+  unicode-range: U+0964-0965, U+0C00-0C7F, U+1CDA, U+200C-200D, U+25CC, U+A830-A839, U+0966-096F;
+  font-display: swap;
+}
+
+/* Apply Noto Sans Devanagari for numerals and specific elements */
+[lang="ne"] .nepali-numeral,
+/* [lang="ne"] [data-i18n*="phone"],
+[lang="ne"] [data-i18n*="copyright"], */
+[lang="ne"] [data-i18n*="+९"],
+[lang="ne"] [data-i18n*="०"],
+[lang="ne"] [data-i18n*="१"],
+[lang="ne"] [data-i18n*="२"],
+[lang="ne"] [data-i18n*="३"],
+[lang="ne"] [data-i18n*="४"],
+[lang="ne"] [data-i18n*="५"],
+[lang="ne"] [data-i18n*="६"],
+[lang="ne"] [data-i18n*="७"],
+[lang="ne"] [data-i18n*="८"],
+[lang="ne"] [data-i18n*="९"] {
+  font-family: 'Noto Sans Devanagari', 'Poppins', sans-serif;
+  /* font-size: 1.15em; */
+  font-feature-settings: "tnum" 0;
+  unicode-bidi: plaintext;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #ccc;
+}
+
+
+.navbar-nav .nav-link {
+  color: #262626;
+  font-weight: 500;
+}
+
+.navbar-nav .nav-link:hover, .navbar-nav .nav-link:focus, .navbar-nav .nav-link.active {
+  color: #1D8D3A;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+#explore-therapy-btn {
+  background-color: #003399;
+  border-color: #003399;
+  color: #FFFFFF;
+}
+
+#explore-therapy-btn:hover {
+  background-color: #002166;
+  border-color: #002166;
+}
+
+#explore-therapy-btn:focus {
+  background-color: #003399;
+  border-color: #003399;
+}
+
+#explore-therapy-btn:active, #explore-therapy-btn.active {
+  background-color: #00184b !important;
+  border-color: #00184b !important;
+}
+
+
+footer {
+  background-color: #111827;
+  color: #CCCCCC;
+}
+
+footer h5 {
+  font-weight: 600;
+  font-size: 20px;
+  color: #FFFFFF;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+}
+footer ul li {
+    margin-bottom: 10px;
+}
+
+footer ul li a {
+    text-decoration: none;
+    color: #CCCCCC;
+   
+}
+
+#diseases span {
+    background-color: #F8F9FA;
+    border: 1px solid #E3E3E3;
+    cursor: pointer;
+}
+
+#diseases span:hover {
+    background-color: #1D8D3A;
+    border-color: #1D8D3A;
+    color: #FFFFFF;
+}
+
+.card-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: auto;
+}
+
+.card-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.custom-nav {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+    gap: 1rem;
+  }
+  .owl-nav button {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #0d6efd;
+  }
+  .owl-nav button:hover {
+    color: #084298;
+  }
+
+  .owl-prev, .owl-next {
+    background-color: #1D8D3A;
+    border-color: #1D8D3A;
+    color: #FFFFFF;
+    padding-block: 5px;
+    padding-inline: 16px;
+    border-radius: 8px;
+    box-shadow: none;
+    border: none;
+  }
+  .owl-prev:hover, .owl-next:hover {
+    background-color: #146329;
+    border-color: #146329;
+  }
+
+  form label {
+    font-weight: 500;
+    font-size: 18px;
+    color: #555555;
+  }
+
+  .form-control, .form-select {
+    border: 1px solid #E3E3E3;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 16px;
+    color: #555555;
+  }
+
+  /* Symptoms pills styling */
+.common-symptoms {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  gap: 12px;
+  padding: 12px 0;
+  scrollbar-width: none;
+  scrollbar-color: #1D8D3A #f0f0f0;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.common-symptoms::-webkit-scrollbar {
+  height: 6px;
+}
+
+.common-symptoms::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+.common-symptoms::-webkit-scrollbar-thumb {
+  background-color: #1D8D3A;
+  border-radius: 10px;
+}
+
+.common-symptoms p {
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 2px solid #1D8D3A;
+  color: #1D8D3A;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(29, 141, 58, 0.1);
+}
+
+.common-symptoms p:hover {
+  background-color: #1D8D3A;
+  border-color: #1D8D3A;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(29, 141, 58, 0.2);
+}
+
+.common-symptoms p:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(29, 141, 58, 0.2);
+}
+
+/* Carousel card styling */
+.owl-carousel .card {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.owl-carousel .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-color: #1D8D3A;
+}
+
+.owl-carousel .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.owl-carousel .card-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 20px;
+  border: 3px solid #1D8D3A;
+  padding: 3px;
+  transition: all 0.3s ease;
+}
+
+.owl-carousel .card:hover .card-icon {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(29, 141, 58, 0.3);
+}
+
+.owl-carousel .card-title {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 1.25rem;
+  transition: color 0.3s ease;
+}
+
+.owl-carousel .card-text {
+  color: #666;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.owl-carousel .btn-outline-primary {
+  color: #1D8D3A;
+  border-color: #1D8D3A;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.owl-carousel .btn-outline-primary:hover {
+  background-color: #1D8D3A;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(29, 141, 58, 0.2);
+}
+
+/* Section spacing */
+.py-5 {
+  padding-top: 4rem !important;
+  padding-bottom: 4rem !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .common-symptoms p {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  
+  .owl-carousel .card-title {
+    font-size: 1.1rem;
+  }
+  
+  .owl-carousel .card-text {
+    font-size: 0.9rem;
+  }
+}
+
+.card-header {
+    padding: 0;
+}
+.card-header img, .card-header iframe {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+#faqAccordion * {
+    font-family: 'Poppins', sans-serif;
+}
+
+#faqAccordion .accordion-button:focus, #faqAccordion .accordion-button:not(.collapsed) {
+    box-shadow: none;    
+}
+#faqAccordion .accordion-body {
+    padding-left: 4rem;
+    padding-top: 0;
+}
+
+
