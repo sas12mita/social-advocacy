@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class OurCampaigns extends Model
 {
-    //
+    protected $guarded=[];
+    
 }

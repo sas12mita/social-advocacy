@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('our_campaigns', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable();
+            $table->string('nep_title')->nullable();
+            $table->text('nep_description')->nullable();
+            $table->string('image');
             $table->timestamps();
         });
     }
