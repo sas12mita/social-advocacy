@@ -108,8 +108,8 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div>Enquiries</div>
+                    <a href="{{ route('categories.index') }}" class="menu-link">
+                        <div>Categories</div>
                     </a>
                 </li>
                 <li class="menu-item">
