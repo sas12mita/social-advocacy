@@ -1,10 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
-
-
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('fronend.pages.welcome');
@@ -18,8 +17,12 @@ Route::prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('backend.admin.dashboard');
     })->name('dashboard');
+
     Route::resource('categories', CategoryController::class);
+    Route::resource('articles', ArticleController::class);
+    Route::post('/article/statusupdate/{id}', [ArticleController::class, 'statusupdate'])->name('articles.statusupdate');
 });
+
 
 
 Route::get('login', [AdminController::class, 'login_view'])->name('admin.login');
