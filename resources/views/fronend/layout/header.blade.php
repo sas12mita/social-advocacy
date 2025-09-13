@@ -82,10 +82,6 @@
                     </li>
                 </ul>
                 <div class="d-flex align-items-center gap-3 justify-content-center my-2 my-lg-0">
-                    <!-- Authentication -->
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#loginModal"
-                        class="link text-primary text-decoration-none">Login</a>
-
                     <!-- Call-to-action button -->
                     <a href="#" class="btn btn-primary">
                         <span data-i18n="सामेल">Join</span>
