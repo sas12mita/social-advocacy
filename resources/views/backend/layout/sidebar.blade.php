@@ -32,13 +32,18 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="{{ route('campaigns.index') }}" class="menu-link">
                         <div>All Campaigns</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="{{ route('campaigns.create') }}" class="menu-link">
                         <div>create Campaigns</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">
+                        <div>Edit Campaigns</div>
                     </a>
                 </li>
             </ul>

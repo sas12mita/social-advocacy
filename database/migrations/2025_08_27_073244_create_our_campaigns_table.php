@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('nep_title')->nullable();
+            $table->string('description');
             $table->text('nep_description')->nullable();
             $table->string('image');
             $table->timestamps();
