@@ -13,9 +13,6 @@ class OurCampaignController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('backend.cms.our-campaign.create');
@@ -31,7 +28,7 @@ class OurCampaignController extends Controller
             'title'            => 'nullable|string|max:255',
             'nep_title'        => 'nullable|string|max:255',
             'nep_description'  => 'nullable|string',
-            'description'  => 'nullable|string',
+            'description'      => 'nullable|string',
             'image'            => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
