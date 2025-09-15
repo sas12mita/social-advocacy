@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('heading');
             $table->text('nep_heading')->nullable();
             $table->text('slug');
-            $table->foreignId('article_category_id')->constrained('article_categories')->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->text('body');
             $table->text('nep_body')->nullable();
             $table->json('image')->nullable();

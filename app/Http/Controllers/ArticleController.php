@@ -27,7 +27,7 @@ class ArticleController extends Controller
         $validated = $request->validate([
             'heading' => 'required|string|max:255',
             'nep_heading' => 'nullable|string|max:255',
-            'article_category_id' => 'required|exists:article_categories,id',
+            'category_id' => 'required|exists:article_categories,id',
             'body' => 'required|string',
             'nep_body' => 'nullable|string',
             'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
