@@ -26,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.cms.our-campaign.create');
     }
 
     /**

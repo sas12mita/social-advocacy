@@ -58,6 +58,14 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="campaigns_date" class="form-label">Campaign Date</label>
+                    <input type="date" name="campaigns_date" id="campaigns_date"
+                        class="form-control" value="{{ old('campaigns_date') }}" required>
+                    @error('campaigns_date')
+                    <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+                <div class="mb-3">
                     <label class="form-label">Image *</label>
                     <input type="file" name="image" class="form-control" accept="image/*" id="imageUpload">
                     <small class="text-muted">Allowed formats: JPEG, PNG, JPG, GIF. Max size: 2MB</small>
@@ -118,7 +126,9 @@
     document.getElementById('cropBtn').addEventListener('click', function() {
         if (!cropper) return;
         cropper.getCroppedCanvas().toBlob((blob) => {
-            croppedFile = new File([blob], selectedFile.name, { type: 'image/jpeg' });
+            croppedFile = new File([blob], selectedFile.name, {
+                type: 'image/jpeg'
+            });
             showPreview(croppedFile);
             updateFileInput(croppedFile);
             modal.hide();

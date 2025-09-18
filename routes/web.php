@@ -24,6 +24,8 @@ Route::prefix('admin')->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('articles', ArticleController::class);
     Route::resource('campaigns', OurCampaignController::class);
+        Route::post('/campaigns/statusupdate/{id}', [OurCampaignController::class,'statusupdate'])->name('campaigns.statusupdate');
+
     Route::resource('events', OurEventController::class);
     Route::post('/article/statusupdate/{id}', [ArticleController::class, 'statusupdate'])->name('articles.statusupdate');
 });
