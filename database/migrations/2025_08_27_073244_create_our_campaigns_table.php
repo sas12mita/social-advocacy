@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('description');
             $table->text('nep_description')->nullable();
             $table->string('image');
+            $table->date('campaigns_date');
+            $table->boolean('publish_status')->default(false);
             $table->timestamps();
         });
     }
