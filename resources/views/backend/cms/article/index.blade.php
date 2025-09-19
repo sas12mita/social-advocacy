@@ -81,7 +81,7 @@
                             <th>Views</th>
                             <th>Created At</th>
                             <th width="15%">Actions</th>
-                        </tr>
+                        </tr>g
                     </thead>
                     <tbody>
                         @foreach($articles as $article)

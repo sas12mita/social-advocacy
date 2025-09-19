@@ -32,7 +32,7 @@
                         <td>{{ Str::limit($campaign->nep_description, 50) }}</td>
                         <td>
                             @if($campaign->image)
-                                <img src="{{ asset('storage/'.$campaign->image) }}" width="50" height="50" style="object-fit: cover;" class="rounded">
+                                <img src="{{ asset('storage'.$campaign->image) }}" width="50" height="50" style="object-fit: cover;" class="rounded">
                             @else
                                 <span class="text-muted">No image</span>
                             @endif

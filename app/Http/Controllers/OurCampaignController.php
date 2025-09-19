@@ -68,39 +68,62 @@ class OurCampaignController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(OurCampaign $OurCampaign)
+    public function edit($id)
     {
-        //
+        $campaign = OurCampaign::findOrFail($id);
+        return view('backend.cms.our-campaign.edit', compact('campaign'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, OurCampaign $OurCampaign)
+    public function update(Request $request, $id)
     {
-        //
+        $campaign = OurCampaign::findOrFail($id);
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'nep_title' => 'required|string|max:255',
+            'description' => 'required',
+            'nep_description' => 'required',
+            'campaigns_date' => 'required|date',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $campaign->title = $request->title;
+        $campaign->nep_title = $request->nep_title;
+        $campaign->description = $request->description;
+        $campaign->nep_description = $request->nep_description;
+        $campaign->campaigns_date = $request->campaigns_date;
+
+        if ($request->hasFile('image')) {
+            // Delete image from storage if it exists
+            if ($campaign->image && Storage::disk('public')->exists($campaign->image)) {
+                Storage::disk('public')->delete($campaign->image);
+            }
+            $path = $request->file('image')->store('campaigns', 'public');
+            $campaign->image = $path;
+        }
+
+        $campaign->save();
+
+        return redirect()->route('campaigns.index')->with('success', 'Campaign updated successfully!');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(OurCampaign $OurCampaign)
     {
-         $images = json_decode($OurCampaign->image, true) ?? [];
-
-        // Delete images from public folder
-        foreach ($images as $image) {
-            if (Storage::disk('public')->exists($image)) {
-                Storage::disk('public')->delete($image);
-            }
+        // Delete image from storage if it exists
+        if ($OurCampaign->image && Storage::disk('public')->exists($OurCampaign->image)) {
+            Storage::disk('public')->delete($OurCampaign->image);
         }
         $OurCampaign->delete();
-        return redirect()->back()->with('success','Successfully deleted');
+        return redirect()->back()->with('success', 'Successfully deleted');
     }
-     public function statusupdate($id)
+    public function statusupdate($id)
     {
         $article = OurCampaign::findOrFail($id);
-        $article->published_status = !$article->published_status;
+        $article->publish_status = !$article->publish_status;
         $article->save();
         return redirect()->back()->with('success', 'Article status updated successfully.');
     }
