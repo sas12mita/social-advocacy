@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
-        public function index()
+    public function index()
     {
         $articles = Article::latest()->paginate(10);
         return view('backend.cms.article.index', compact('articles'));
@@ -17,7 +18,7 @@ class ArticleController extends Controller
 
     public function create()
     {
-        $categories = Article::all();
+        $categories = Category::all();
         return view('backend.cms.article.create', compact('categories'));
     }
 
