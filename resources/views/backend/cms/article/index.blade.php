@@ -49,7 +49,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Status</label>
-                            <select name="published_status" class="form-select">
+                            <select name="publish_status" class="form-select">
                                 <option value="1">Published</option>
                                 <option value="0">Draft</option>
                             </select>
@@ -111,8 +111,8 @@
 
                             </td>
                             <td>
-                                <span class="badge bg-{{ $article->published_status ? 'success' : 'warning' }}">
-                                    {{ $article->published_status ? 'Published' : 'Unpublished' }}
+                                <span class="badge bg-{{ $article->publish_status ? 'success' : 'warning' }}">
+                                    {{ $article->publish_status ? 'Published' : 'Unpublished' }}
                                 </span>
                             </td>
                             <td>{{ $article->views }}</td>
@@ -135,9 +135,9 @@
                                         </form>
                                         <form action="{{ route('articles.statusupdate', $article->id) }}" method="POST" class="d-inline">
                                             @csrf
-                                            <button type="submit" class="dropdown-item text-{{ $article->published_status ? 'danger' : 'success' }}">
+                                            <button type="submit" class="dropdown-item text-{{ $article->publish_status ? 'danger' : 'success' }}">
                                                 <i class="bx bx-sync me-1"></i>
-                                                {{ $article->published_status ? 'Unpublish' : 'Publish' }}
+                                                {{ $article->publish_status ? 'Unpublish' : 'Publish' }}
                                             </button>
                                         </form>
                                     </div>

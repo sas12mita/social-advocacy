@@ -125,6 +125,6 @@ class OurCampaignController extends Controller
         $article = OurCampaign::findOrFail($id);
         $article->publish_status = !$article->publish_status;
         $article->save();
-        return redirect()->back()->with('success', 'Article status updated successfully.');
+        return redirect()->back()->with('success', 'Our Campaign status updated successfully.');
     }
 }
