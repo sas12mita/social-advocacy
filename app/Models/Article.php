@@ -14,7 +14,7 @@ class Article extends Model
         'heading',
         'nep_heading',
         'slug',
-        'article_category_id',
+        'category_id',
         'body',
         'nep_body',
         'image',

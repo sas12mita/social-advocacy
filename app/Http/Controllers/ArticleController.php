@@ -24,18 +24,19 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
-        $validated = $request->validate([
-            'heading' => 'required|string|max:255',
-            'nep_heading' => 'nullable|string|max:255',
-            'category_id' => 'required|exists:article_categories,id',
-            'body' => 'required|string',
-            'nep_body' => 'nullable|string',
-            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'published_status' => 'nullable|boolean'
-        ]);
-
+        //  dd($request->all());
         try {
+            $validated = $request->validate([
+                'heading' => 'required|string|max:255',
+                'nep_heading' => 'nullable|string|max:255',
+                'category_id' => 'required|exists:categories,id',
+                'body' => 'required|string',
+                'nep_body' => 'nullable|string',
+                'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'published_status' => 'nullable|boolean'
+            ]);
+
+
             // Generate unique slug
             $slug = Str::slug($validated['heading']);
             $originalSlug = $slug;

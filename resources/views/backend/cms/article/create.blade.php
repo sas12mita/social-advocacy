@@ -57,16 +57,16 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">Category *</label>
-                        <select name="article_category_id" class="form-select" required>
+                        <select name="category_id" class="form-select" required>
                             <option value="">Select Category</option>
                             @foreach ($categories as $category)
                             <option value="{{ $category->id }}"
-                                {{ old('article_category_id') == $category->id ? 'selected' : '' }}>
+                                {{ old('category_id') == $category->id ? 'selected' : '' }}>
                                 {{ $category->name }}
                             </option>
                             @endforeach
                         </select>
-                        @error('article_category_id')
+                        @error('category_id')
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
