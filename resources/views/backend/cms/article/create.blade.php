@@ -79,14 +79,14 @@
                             id="imageUpload">
                         <small class="text-muted">Allowed formats: JPEG, PNG, JPG, GIF. Max size: 2MB each</small>
                         <div id="fileSizeError" class="text-danger d-none"></div>
-                    <!-- Cropped preview thumbnails -->
+                        <!-- Cropped preview thumbnails -->
                         <div id="croppedPreviewContainer" class="d-flex flex-wrap gap-3 mb-3 mt-3"></div>
                         @error('image.*')
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
-                
+
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">Content (English) *</label>
@@ -120,58 +120,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script> --}}
 
 <script>
-    // Initialize Summernote
-    // $(document).ready(function() {
-    //     $('#summernote').summernote({
-    //         placeholder: 'Write your content here...',
-    //         height: 300,
-    //         toolbar: [
-    //             ['style', ['style']],
-    //             ['font', ['bold', 'italic', 'underline', 'clear']],
-    //             ['color', ['color']],
-    //             ['para', ['ul', 'ol', 'paragraph']],
-    //             ['table', ['table']],
-    //             ['insert', ['link', 'picture', 'video']],
-    //             ['view', ['fullscreen', 'codeview', 'help']]
-    //         ]
-    //     });
-    // });
-    let selectedFiles = [];
-    let croppedFiles = [];
-    let currentIndex = 0;
-    let cropper;
-    const cropImage = document.getElementById('cropImage');
-    const modalElement = document.getElementById('cropperModal');
-    const modal = new bootstrap.Modal(modalElement);
-    const previewList = document.getElementById('croppedPreviewContainer');
-    const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
-
-    document.getElementById('imageUpload').addEventListener('change', function(e) {
-        const files = Array.from(e.target.files);
-        const validFiles = [];
-        const invalidFiles = [];
-
-        // Validate files
-        files.forEach(file => {
-            if (file.size > MAX_FILE_SIZE) {
-                invalidFiles.push(file.name);
-            } else {
-                validFiles.push(file);
-            }
-        });
-
-        if (invalidFiles.length > 0) {
-            alert(`The following files exceed 2MB limit and won't be uploaded:\n${invalidFiles.join('\n')}`);
-        }
-
-        if (validFiles.length > 0) {
-            // ✅ Merge new files instead of replacing
-            selectedFiles = [...selectedFiles, ...validFiles];
-            currentIndex = selectedFiles.length - validFiles.length;
-            loadImageForCropping(currentIndex);
-        }
-    });
-
     function loadImageForCropping(index) {
         const file = selectedFiles[index];
         const reader = new FileReader();
@@ -203,8 +151,12 @@
             const croppedFile = new File([blob], originalName, {
                 type: 'image/jpeg'
             });
-            croppedFiles.push(croppedFile);
-            createPreviewThumbnail(blob);
+
+            // replace or push cropped file
+            croppedFiles[currentIndex] = croppedFile;
+
+            // show preview (replaces old one if exists)
+            createPreviewThumbnail(croppedFile, currentIndex);
 
             currentIndex++;
             if (currentIndex < selectedFiles.length) {
@@ -217,8 +169,8 @@
     });
 
     document.getElementById('skipBtn').addEventListener('click', function() {
-        croppedFiles.push(selectedFiles[currentIndex]);
-        createPreviewThumbnail(selectedFiles[currentIndex]);
+        croppedFiles[currentIndex] = selectedFiles[currentIndex];
+        createPreviewThumbnail(selectedFiles[currentIndex], currentIndex);
 
         currentIndex++;
         if (currentIndex < selectedFiles.length) {
@@ -229,10 +181,15 @@
         }
     });
 
-    function createPreviewThumbnail(fileOrBlob) {
+    function createPreviewThumbnail(fileOrBlob, index) {
+        // remove old preview if exists
+        const existing = previewList.querySelector(`[data-index="${index}"]`);
+        if (existing) existing.remove();
+
         const wrapper = document.createElement('div');
         wrapper.className = 'position-relative d-inline-block me-2 mb-2';
         wrapper.style.width = '150px';
+        wrapper.setAttribute('data-index', index);
 
         const previewImg = document.createElement('img');
         previewImg.src = URL.createObjectURL(fileOrBlob);
@@ -249,8 +206,8 @@
         wrapper.appendChild(deleteBtn);
         previewList.appendChild(wrapper);
 
+        // delete logic
         deleteBtn.addEventListener('click', () => {
-            const index = Array.from(previewList.children).indexOf(wrapper);
             croppedFiles.splice(index, 1);
             selectedFiles.splice(index, 1);
             wrapper.remove();
@@ -260,15 +217,10 @@
 
     function updateFileInput() {
         const dataTransfer = new DataTransfer();
-        croppedFiles.forEach(file => dataTransfer.items.add(file));
+        croppedFiles.forEach(file => {
+            if (file) dataTransfer.items.add(file);
+        });
         document.getElementById('imageUpload').files = dataTransfer.files;
     }
-
-    modalElement.addEventListener('hidden.bs.modal', function() {
-        if (cropper) {
-            cropper.destroy();
-            cropper = null;
-        }
-    });
 </script>
 @endpush
