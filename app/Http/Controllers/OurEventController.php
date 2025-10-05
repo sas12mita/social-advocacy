@@ -7,59 +7,96 @@ use Illuminate\Http\Request;
 
 class OurEventController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+   public function index()
     {
-        //
+        $OurEvents = OurEvent::latest()->paginate(10); // get all OurEvents with pagination
+        return view('OurEvents.index', compact('OurEvents'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new OurEvent.
      */
     public function create()
     {
-        //
+        return view('OurEvents.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created OurEvent in storage.
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title'           => 'required|string|max:255',
+            'nep_title'       => 'required|string|max:255',
+            'deadline'        => 'required|date',
+            'description'     => 'required|string',
+            'nep_description' => 'required|string',
+            'price'           => 'required|string|max:255',
+        ]);
+
+        OurEvent::create([
+            'title'           => $request->title,
+            'nep_title'       => $request->nep_title,
+            'deadline'        => $request->deadline,
+            'description'     => $request->description,
+            'nep_description' => $request->nep_description,
+            'price'           => $request->price,
+            'publish_status'  => $request->has('publish_status'),
+        ]);
+
+        return redirect()->route('OurEvents.index')->with('success', 'OurEvent created successfully.');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified OurEvent.
      */
-    public function show(OurEvent $ourEvent)
+    public function show(OurEvent $OurEvent)
     {
-        //
+        return view('OurEvents.show', compact('OurEvent'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified OurEvent.
      */
-    public function edit(OurEvent $ourEvent)
+    public function edit(OurEvent $OurEvent)
     {
-        //
+        return view('OurEvents.edit', compact('OurEvent'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified OurEvent in storage.
      */
-    public function update(Request $request, OurEvent $ourEvent)
+    public function update(Request $request, OurEvent $OurEvent)
     {
-        //
+        $request->validate([
+            'title'           => 'required|string|max:255',
+            'nep_title'       => 'required|string|max:255',
+            'deadline'        => 'required|date',
+            'description'     => 'required|string',
+            'nep_description' => 'required|string',
+            'price'           => 'required|string|max:255',
+        ]);
+
+        $OurEvent->update([
+            'title'           => $request->title,
+            'nep_title'       => $request->nep_title,
+            'deadline'        => $request->deadline,
+            'description'     => $request->description,
+            'nep_description' => $request->nep_description,
+            'price'           => $request->price,
+            'publish_status'  => $request->has('publish_status'),
+        ]);
+
+        return redirect()->route('OurEvents.index')->with('success', 'OurEvent updated successfully.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified OurEvent from storage.
      */
-    public function destroy(OurEvent $ourEvent)
+    public function destroy(OurEvent $OurEvent)
     {
-        //
+        $OurEvent->delete();
+        return redirect()->route('OurEvents.index')->with('success', 'OurEvent deleted successfully.');
     }
 }

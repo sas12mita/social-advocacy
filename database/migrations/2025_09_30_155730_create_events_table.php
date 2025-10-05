@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('our_events', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('nep_title');
@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->text('nep_description');
             $table->string('price');
+            $table->boolean('publish_status')->default(false);
             $table->timestamps();
         });
     }
