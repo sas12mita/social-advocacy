@@ -63,7 +63,7 @@
                 </li>
             </ul>
         </li>
-        
+
         <!-- Event Management -->
 
         <li class="menu-item">
@@ -73,10 +73,16 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="{{ route('events.index') }}" class="menu-link">
                         <div>All Events</div>
                     </a>
                 </li>
+                <li class="menu-item">
+                    <a href="{{ route('events.create') }}" class="menu-link">
+                        <div>Create Events</div>
+                    </a>
+                </li>
+
                 <li class="menu-item">
                     <a href="#" class="menu-link">
                         <div>Registered Events</div>

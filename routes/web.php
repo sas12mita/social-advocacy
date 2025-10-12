@@ -23,11 +23,14 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('categories', CategoryController::class);
     Route::resource('articles', ArticleController::class);
+    Route::post('/article/statusupdate/{id}', [ArticleController::class, 'statusupdate'])->name('articles.statusupdate');
+
     Route::resource('campaigns', OurCampaignController::class);
-        Route::post('/campaigns/statusupdate/{id}', [OurCampaignController::class,'statusupdate'])->name('campaigns.statusupdate');
+    Route::post('/campaigns/statusupdate/{id}', [OurCampaignController::class, 'statusupdate'])->name('campaigns.statusupdate');
 
     Route::resource('events', OurEventController::class);
-    Route::post('/article/statusupdate/{id}', [ArticleController::class, 'statusupdate'])->name('articles.statusupdate');
+        Route::post('/events/statusupdate/{id}', [OurEventController::class, 'statusupdate'])->name('events.statusupdate');
+
 });
 
 

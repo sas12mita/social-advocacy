@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->text('nep_description');
             $table->string('price');
+            $table->string('image');
             $table->boolean('publish_status')->default(false);
             $table->timestamps();
         });
