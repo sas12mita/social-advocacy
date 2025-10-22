@@ -18,36 +18,29 @@
     <div class="container">
         <h2 class="mb-4 text-center" data-i18n="अभियान">Our Campaigns</h2>
         <div class="row g-4">
+            @forelse($campaigns as $campaign)
             <div class="col-md-4">
-                <div class="card h-100">
-                    <img src="assets/images/campaign1.jpg" class="card-img-top" alt="Campaign 1">
+                <div class="card h-100 shadow-sm">
+                    <img src="{{ asset('uploads/campaigns/' . $campaign->image) }}"
+                        class="card-img-top"
+                        alt="{{ $campaign->title ?? 'Campaign Image' }}"
+                        style="height: 250px; object-fit: cover;">
                     <div class="card-body">
-                        <h5 class="card-title">Education for All</h5>
-                        <p class="card-text">Promoting access to quality education for underprivileged children.</p>
-                        <a href="#" class="btn btn-outline-primary">Learn More</a>
+                        <h5 class="card-title">
+                            {{ app()->getLocale() === 'ne' ? $campaign->nep_title : $campaign->title }}
+                        </h5>
+                        <p class="card-text">
+                            {{ Str::limit(app()->getLocale() === 'ne' ? $campaign->nep_description : $campaign->description, 100) }}
+                        </p>
+                        <a href="{{ route('campaign.show', $campaign->id) }}" class="btn btn-outline-primary">
+                            Learn More
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <img src="assets/images/campaign2.jpg" class="card-img-top" alt="Campaign 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Clean Environment</h5>
-                        <p class="card-text">Raising awareness and taking action for a cleaner environment.</p>
-                        <a href="#" class="btn btn-outline-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <img src="assets/images/campaign3.jpg" class="card-img-top" alt="Campaign 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Health & Wellness</h5>
-                        <p class="card-text">Supporting community health initiatives for everyone.</p>
-                        <a href="#" class="btn btn-outline-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
+            @empty
+            <p class="text-center">No campaigns available right now.</p>
+            @endforelse
         </div>
     </div>
 </section>
