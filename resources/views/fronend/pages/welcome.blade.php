@@ -23,54 +23,69 @@
                 <div class="card h-100 shadow-sm">
                     <img src="{{ asset('uploads/campaigns/' . $campaign->image) }}"
                         class="card-img-top"
-                        alt="{{ $campaign->title ?? 'Campaign Image' }}"
+                        alt="{{ $campaign->title }}"
                         style="height: 250px; object-fit: cover;">
                     <div class="card-body">
-                        <h5 class="card-title">
-                            {{ app()->getLocale() === 'ne' ? $campaign->nep_title : $campaign->title }}
+                        <h5 class="card-title" data-i18n="{{ $campaign->nep_title }}">
+                            {{ $campaign->title }}
                         </h5>
-                        <p class="card-text">
-                            {{ Str::limit(app()->getLocale() === 'ne' ? $campaign->nep_description : $campaign->description, 100) }}
+                        <p class="card-text" data-i18n="{{ $campaign->nep_description }}">
+                            {{ Str::limit($campaign->description, 100) }}
                         </p>
-                        <a href="{{ route('campaign.show', $campaign->id) }}" class="btn btn-outline-primary">
+                        <a href="{{ route('campaign.show', $campaign->id) }}"
+                            class="btn btn-outline-primary"
+                            data-i18n="थप जान्नुहोस्">
                             Learn More
                         </a>
                     </div>
                 </div>
             </div>
             @empty
-            <p class="text-center">No campaigns available right now.</p>
+            <p class="text-center" data-i18n="कुनै अभियान उपलब्ध छैन">
+                No campaigns available right now.
+            </p>
             @endforelse
         </div>
     </div>
 </section>
+
 
 <!-- Events Section -->
 <section class="bg-light py-5">
     <div class="container">
         <h2 class="mb-4 text-center" data-i18n="कार्यक्रमहरू">Upcoming Events</h2>
         <div class="row g-4">
+            @forelse($events as $event)
             <div class="col-md-6">
-                <div class="card">
+                <div class="card h-100 shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title">Community Clean-Up</h5>
-                        <p class="card-text">Join us on 10th September for a community park clean-up event.</p>
-                        <a href="#" class="btn btn-primary">Register</a>
+                        <h5 class="card-title" data-i18n="{{ $event->nep_title }}">
+                            {{ $event->title }}
+                        </h5>
+                        <p class="card-text" data-i18n="{{ $event->nep_description }}">
+                            {{ Str::limit($event->description, 120) }}
+                        </p>
+                        <p class="text-muted mb-2">
+                            <strong data-i18n="मिति">Deadline:</strong>
+                            {{ \Carbon\Carbon::parse($event->deadline)->format('d M Y') }}
+                        </p>
+                        <a href="{{ route('event.show', $event->id) }}"
+                            class="btn btn-primary"
+                            data-i18n="दर्ता गर्नुहोस्">
+                            Register
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Fundraising Gala</h5>
-                        <p class="card-text">A fundraising event to support education campaigns on 25th September.</p>
-                        <a href="#" class="btn btn-primary">Register</a>
-                    </div>
-                </div>
-            </div>
+            @empty
+            <p class="text-center" data-i18n="कुनै कार्यक्रम उपलब्ध छैन">
+                No upcoming events available right now.
+            </p>
+            @endforelse
         </div>
     </div>
 </section>
+
 
 <!-- Blog Section -->
 <section class="py-5">
