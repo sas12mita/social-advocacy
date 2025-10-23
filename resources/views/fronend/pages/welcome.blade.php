@@ -129,7 +129,7 @@
 <!-- Call to Action -->
 <section class="bg-primary text-white text-center py-5">
     <div class="container">
-        <h2 class="mb-3" data-i18n="स्वयंसेवक">Become a Volunteer</h2>
+        <h2 class="mb-3" data-i18n="स्वयंसेवक">a Volunteer</h2>
         <p class="mb-4">Join our community and help us make a difference today!</p>
         <a href="#" class="btn btn-light btn-lg" data-i18n="सामेल">Join Us</a>
     </div>
