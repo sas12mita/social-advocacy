@@ -3,18 +3,20 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\OurCampaignController;
 use App\Http\Controllers\OurEventController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    return view('fronend.pages.welcome');
-});
+
+Route::get('/', [FrontendController::class,'index'])->name('index');
+
 Route::get('/admin/login', function () {
     return view('backend.admin.login');
 });
 
+Route::post('/events/register', [OurEventController::class, 'register'])->name('events.register');
 
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', function () {

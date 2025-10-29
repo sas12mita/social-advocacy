@@ -61,9 +61,10 @@ class OurEventController extends Controller
     /**
      * Display the specified OurEvent.
      */
-    public function show(OurEvent $OurEvent)
+    public function show($id)
     {
-        // return view('OurEvents.show', compact('OurEvent'));
+        $event = OurEvent::findOrFail($id);
+        return view('fronend.pages.events-show', compact('event'));
     }
 
     /**
@@ -136,4 +137,5 @@ class OurEventController extends Controller
         $event->save();
         return redirect()->back()->with('success', 'Our Events status updated successfully.');
     }
+    public function register() {}
 }
