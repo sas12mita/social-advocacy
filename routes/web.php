@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\EventRegistrationController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\OurCampaignController;
 use App\Http\Controllers\OurEventController;
@@ -10,13 +11,13 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', [FrontendController::class,'index'])->name('index');
+Route::get('/', [FrontendController::class, 'index'])->name('index');
 
 Route::get('/admin/login', function () {
     return view('backend.admin.login');
 });
 
-Route::post('/events/register', [OurEventController::class, 'register'])->name('events.register');
+Route::post('/events/register', [EventRegistrationController::class, 'register'])->name('events.register');
 
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
@@ -31,8 +32,9 @@ Route::prefix('admin')->group(function () {
     Route::post('/campaigns/statusupdate/{id}', [OurCampaignController::class, 'statusupdate'])->name('campaigns.statusupdate');
 
     Route::resource('events', OurEventController::class);
-        Route::post('/events/statusupdate/{id}', [OurEventController::class, 'statusupdate'])->name('events.statusupdate');
+    Route::post('/events/statusupdate/{id}', [OurEventController::class, 'statusupdate'])->name('events.statusupdate');
 
+    Route::get('/events/{id}/register', [EventRegistrationController::class, 'eventregistered'])->name('events.registerviewall');
 });
 
 

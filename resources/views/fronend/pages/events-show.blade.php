@@ -51,7 +51,7 @@
                             <input type="hidden" name="event_id" value="{{ $event->id }}">
 
                         <div class="mb-3">
-                            <label for="name" class="form-label" data-i18n="नाम">Name</label>
+                            <label for="name" class="form-label" data-i18n="नाम">Full Name</label>
                             <input type="text" name="name" id="name" class="form-control" required>
                         </div>
 

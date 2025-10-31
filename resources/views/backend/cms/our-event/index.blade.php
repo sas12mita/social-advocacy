@@ -34,14 +34,14 @@
                             <td>
                                 <div class="fw-semibold">{{ $event->title }}</div>
                                 @if($event->nep_title)
-                                    <div class="text-muted small">{{ $event->nep_title }}</div>
+                                <div class="text-muted small">{{ $event->nep_title }}</div>
                                 @endif
                             </td>
                             <td>
                                 @if($event->image && file_exists(public_path('storage/' . $event->image)))
-                                    <img src="{{ asset('storage/' . $event->image) }}" width="60" height="60" style="object-fit: cover;" class="rounded">
+                                <img src="{{ asset('storage/' . $event->image) }}" width="60" height="60" style="object-fit: cover;" class="rounded">
                                 @else
-                                    <span class="text-muted">No image</span>
+                                <span class="text-muted">No image</span>
                                 @endif
                             </td>
                             <td>{{ $event->price }}</td>
@@ -70,6 +70,11 @@
                                             </button>
                                         </form>
 
+                                        <a href="{{ route('events.registerviewall', $event->id) }}" class="dropdown-item text-primary">
+                                            <i class="bx bx-user me-1"></i> View Registrations
+                                        </a>
+
+
                                         <form action="{{ route('events.statusupdate', $event->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             <button type="submit" class="dropdown-item text-{{ $event->publish_status ? 'danger' : 'success' }}">
@@ -94,17 +99,17 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Delete confirmation
-    const deleteForms = document.querySelectorAll('form[action*="/events/"]');
-    deleteForms.forEach(form => {
-        form.addEventListener('submit', function(e) {
-            if (!confirm('Are you sure you want to delete this event?')) {
-                e.preventDefault();
-            }
+    document.addEventListener('DOMContentLoaded', function() {
+        // Delete confirmation
+        const deleteForms = document.querySelectorAll('form[action*="/events/"]');
+        deleteForms.forEach(form => {
+            form.addEventListener('submit', function(e) {
+                if (!confirm('Are you sure you want to delete this event?')) {
+                    e.preventDefault();
+                }
+            });
         });
     });
-});
 </script>
 
 @endsection

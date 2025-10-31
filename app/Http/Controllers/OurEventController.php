@@ -137,5 +137,5 @@ class OurEventController extends Controller
         $event->save();
         return redirect()->back()->with('success', 'Our Events status updated successfully.');
     }
-    public function register() {}
+   
 }
