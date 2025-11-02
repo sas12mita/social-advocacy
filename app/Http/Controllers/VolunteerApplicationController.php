@@ -12,7 +12,7 @@ class VolunteerApplicationController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -28,7 +28,18 @@ class VolunteerApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string',
+            'motivation' => 'nullable|string',
+        ]);
+
+        $volunteer = VolunteerApplication::create($validated);
+
+       return redirect()->back()->with('success','application created successfully');
     }
 
     /**

@@ -7,7 +7,9 @@ use App\Http\Controllers\EventRegistrationController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\OurCampaignController;
 use App\Http\Controllers\OurEventController;
+use App\Http\Controllers\VolunteerApplicationController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -18,6 +20,8 @@ Route::get('/admin/login', function () {
 });
 
 Route::post('/events/register', [EventRegistrationController::class, 'register'])->name('events.register');
+Route::post('/volunteer-applications/register', [VolunteerApplicationController::class, 'store'])
+    ->name('volunteer-applications.store');
 
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
@@ -35,6 +39,11 @@ Route::prefix('admin')->group(function () {
     Route::post('/events/statusupdate/{id}', [OurEventController::class, 'statusupdate'])->name('events.statusupdate');
 
     Route::get('/events/{id}/register', [EventRegistrationController::class, 'eventregistered'])->name('events.registerviewall');
+    // Delete an application
+    Route::delete('volunteer-applications/{id}', [VolunteerApplicationController::class, 'destroy'])
+        ->name('volunteer-applications.destroy');
+    Route::get('volunteer-applications', [VolunteerApplicationController::class, 'index'])
+        ->name('volunteer-applications.index');
 });
 
 

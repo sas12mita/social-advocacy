@@ -9,7 +9,9 @@
         <p class="lead mb-4" data-i18n="हमारा उद्देश्य">
             Our mission is to create positive social change in communities.
         </p>
-        <a href="#" class="btn btn-primary btn-lg" data-i18n="सामेल">Join Us</a>
+        <a href="#" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#joinUsModal" data-i18n="सामेल">
+            Join Us
+        </a>
     </div>
 </section>
 
@@ -78,7 +80,7 @@
                             {{ \Carbon\Carbon::parse($event->deadline)->format('d M Y') }}
                         </p>
                         <a href="{{ route('events.show',$event->id) }}" class="btn btn-outline-primary btn-sm rounded-pill px-3" data-i18n="थप जान्नुहोस्">
-                            Register Now 
+                            Register Now
                         </a>
                     </div>
                 </div>
@@ -132,14 +134,48 @@
     </div>
 </section>
 
-<!-- Call to Action -->
-<section class="bg-primary text-white text-center py-5">
-    <div class="container">
-        <h2 class="mb-3" data-i18n="स्वयंसेवक">a Volunteer</h2>
-        <p class="mb-4">Join our community and help us make a difference today!</p>
-        <a href="#" class="btn btn-light btn-lg" data-i18n="सामेल">Join Us</a>
+
+
+<!-- Bootstrap Modal for Join Us Form -->
+<div class="modal fade" id="joinUsModal" tabindex="-1" aria-labelledby="joinUsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="joinUsModalLabel">Join as a Volunteer</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <form id="volunteerForm" method="POST" action="{{ route('volunteer-applications.store') }}">
+                    @csrf
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="name" class="form-label fw-bold">Full Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required placeholder="Enter your name">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label fw-bold">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required placeholder="Enter your email">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="phone" class="form-label fw-bold">Phone</label>
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter your phone number">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="address" class="form-label fw-bold">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address">
+                        </div>
+                        <div class="col-12">
+                            <label for="motivation" class="form-label fw-bold">Why do you want to join?</label>
+                            <textarea class="form-control" id="motivation" name="motivation" rows="3" placeholder="Write your motivation here..."></textarea>
+                        </div>
+                    </div>
+                    <div class="text-end mt-4">
+                        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit Application</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-</section>
-
-
+</div>
 @endsection

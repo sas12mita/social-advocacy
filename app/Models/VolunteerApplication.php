@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class VolunteerApplication extends Model
 {
-    //
+    protected $guarded=[];
+    
 }
