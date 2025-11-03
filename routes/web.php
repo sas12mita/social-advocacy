@@ -22,6 +22,7 @@ Route::get('/admin/login', function () {
 Route::post('/events/register', [EventRegistrationController::class, 'register'])->name('events.register');
 Route::post('/volunteer-applications/register', [VolunteerApplicationController::class, 'store'])
     ->name('volunteer-applications.store');
+Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
 
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
@@ -29,7 +30,7 @@ Route::prefix('admin')->group(function () {
     })->name('admin.dashboard');
 
     Route::resource('categories', CategoryController::class);
-    Route::resource('articles', ArticleController::class);
+    Route::resource('articles', ArticleController::class)->except(['show']);;
     Route::post('/article/statusupdate/{id}', [ArticleController::class, 'statusupdate'])->name('articles.statusupdate');
 
     Route::resource('campaigns', OurCampaignController::class);

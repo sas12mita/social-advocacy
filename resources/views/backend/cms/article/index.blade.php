@@ -111,8 +111,8 @@
 
                             </td>
                             <td>
-                                <span class="badge bg-{{ $article->publish_status ? 'success' : 'warning' }}">
-                                    {{ $article->publish_status ? 'Published' : 'Unpublished' }}
+                                <span class="badge bg-{{ $article->published_status ? 'success' : 'warning' }}">
+                                    {{ $article->published_status ? 'Published' : 'Unpublished' }}
                                 </span>
                             </td>
                             <td>{{ $article->views }}</td>

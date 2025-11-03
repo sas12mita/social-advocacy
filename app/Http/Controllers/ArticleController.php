@@ -66,14 +66,22 @@ class ArticleController extends Controller
         }
     }
 
-    public function show(Article $article)
+    public function show($id)
     {
-        return $article;
+        $article = Article::findOrFail($id);
+
+        $categoryId = $article->category_id;
+        $relatedArticles = Article::where('category_id', $categoryId)
+            ->where('id', '!=', $article->id)
+            ->take(5) 
+            ->get();
+            return view('fronend.pages.article-show',compact('article','relatedArticles'));
     }
 
     public function edit(Article $article)
     {
-        $categories = Article::all();
+        $categories = Category::all();
+
         $article->images = json_decode($article->image, true) ?? [];
         return view('backend.cms.article.edit', compact('article', 'categories'));
     }
@@ -147,6 +155,7 @@ class ArticleController extends Controller
     public function statusupdate($id)
     {
         $article = Article::findOrFail($id);
+        //dd($id);
         $article->published_status = !$article->published_status;
         $article->save();
 

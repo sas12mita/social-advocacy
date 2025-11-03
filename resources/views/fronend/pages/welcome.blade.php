@@ -100,36 +100,24 @@
     <div class="container">
         <h2 class="mb-4 text-center" data-i18n="ब्लग">Latest Blog</h2>
         <div class="row g-4">
+            @foreach($articles as $article)
             <div class="col-md-4">
                 <div class="card h-100">
-                    <img src="assets/images/blog1.jpg" class="card-img-top" alt="Blog 1">
+                    @php
+                    $images = $article->image ? json_decode($article->image) : [];
+                    $firstImage = $images[0] ?? null;
+                    @endphp
+                    <img src="{{ $firstImage ? asset('storage/'.$firstImage) : asset('assets/images/default.jpg') }}"
+                        class="card-img-top"
+                        alt="{{ $article->heading }}">
                     <div class="card-body">
-                        <h5 class="card-title">5 Ways to Make a Difference</h5>
-                        <p class="card-text">Learn how small actions can create a big social impact.</p>
-                        <a href="#" class="btn btn-outline-primary">Read More</a>
+                        <h5 class="card-title">{{ $article->heading }}</h5>
+                        <p class="card-text">{{ Str::limit(strip_tags($article->body), 80) }}</p>
+                        <a href="{{ route('articles.show', $article->slug) }}" class="btn btn-outline-primary">Read More</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <img src="assets/images/blog2.jpg" class="card-img-top" alt="Blog 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Volunteer Stories</h5>
-                        <p class="card-text">Inspiring stories from our dedicated volunteers.</p>
-                        <a href="#" class="btn btn-outline-primary">Read More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <img src="assets/images/blog3.jpg" class="card-img-top" alt="Blog 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Health & Wellness Tips</h5>
-                        <p class="card-text">Simple tips to maintain good health in your community.</p>
-                        <a href="#" class="btn btn-outline-primary">Read More</a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
