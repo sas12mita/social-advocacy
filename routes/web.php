@@ -44,6 +44,8 @@ Route::prefix('admin')->group(function () {
         ->name('volunteer-applications.destroy');
     Route::get('volunteer-applications', [VolunteerApplicationController::class, 'index'])
         ->name('volunteer-applications.index');
+    Route::post('volunteer-applications/{id}', [VolunteerApplicationController::class, 'approvedstatus'])
+        ->name('volunteer-applications.approved');
 });
 
 

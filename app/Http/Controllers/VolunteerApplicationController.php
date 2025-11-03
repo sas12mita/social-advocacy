@@ -12,7 +12,8 @@ class VolunteerApplicationController extends Controller
      */
     public function index()
     {
-        
+        $volunteers = VolunteerApplication::paginate(10);
+        return view('backend.cms.volunter-application.index', compact('volunteers'));
     }
 
     /**
@@ -28,7 +29,7 @@ class VolunteerApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
@@ -39,7 +40,7 @@ class VolunteerApplicationController extends Controller
 
         $volunteer = VolunteerApplication::create($validated);
 
-       return redirect()->back()->with('success','application created successfully');
+        return redirect()->back()->with('success', 'application created successfully');
     }
 
     /**
@@ -69,8 +70,19 @@ class VolunteerApplicationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(VolunteerApplication $volunteerApplication)
+    public function destroy($id)
     {
-        //
+        $volunteer = VolunteerApplication::findOrFail($id);
+        $volunteer->delete();
+
+        return redirect()->back()->with('success', 'Volunteer application deleted successfully.');
+    }
+    public function approvedstatus($id)
+    {
+        $v = VolunteerApplication::findOrFail($id);
+        $v->approved = !$v->approved;
+        $v->save();
+
+        return back()->with('success', 'Status Updated');
     }
 }

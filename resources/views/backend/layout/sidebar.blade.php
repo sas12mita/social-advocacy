@@ -83,11 +83,23 @@
                     </a>
                 </li>
 
+                
+            </ul>
+        </li>
+
+<!--Volunteer Application-->
+
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-news"></i>
+                <div>Volunteer Application</div>
+            </a>
+            <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div>Registered Events</div>
+                    <a href="{{ route('volunteer-applications.index') }}" class="menu-link">
+                        <div>All Application</div>
                     </a>
-                </li>
+                </li>                
             </ul>
         </li>
 
