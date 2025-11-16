@@ -1,4 +1,3 @@
-
 <header>
     <!-- Top bar -->
     <div class="bg-primary d-flex justify-content-between align-items-center px-2 px-lg-5 py-2 text-white flex-wrap row-gap-2"
@@ -73,19 +72,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-i18n="अभियान">Campaigns</a>
                     </li>
-                   
+
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-i18n="ब्लग">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" data-i18n="सम्पर्क">Contact Us</a>
+                        <a class="nav-link" href="#"  data-bs-toggle="modal" data-bs-target="#joinUsModal" data-i18n="सम्पर्क">Contact Us</a>
                     </li>
                 </ul>
-                <div class="d-flex align-items-center gap-3 justify-content-center my-2 my-lg-0">
+                <div class="d-flex align-items-center gap-3 justify-content-center my-1 my-lg-0">
                     <!-- Call-to-action button -->
-                    <a href="#" class="btn btn-primary">
-                        <span data-i18n="सामेल">Join</span>
-                        <span class="text-nowrap"><span data-i18n="हुनुहोस्">Us</span> <i class="bi bi-arrow-right"></i></span>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#joinUsModal" data-i18n="सामेल">
+                        Join Us
                     </a>
                 </div>
             </div>
